@@ -1,0 +1,22 @@
+.navigation {
+  background-color: #dbeafe;
+  height: 4.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #1f2937;
+}
+.navigation ul {
+  display: flex;
+}
+.navigation a {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #1f2937;
+}
+.navigation a:hover {
+  background-color: #f0f9ff;
+  color: #075985;
+  border-radius: 5px;
+}
