@@ -1,10 +1,25 @@
 import Layout from "../Layout/Layout";
 import * as data from "../data";
-import { useCartActions } from "../Providers/CartProvider";
+import { useCart, useCartActions } from "../Providers/CartProvider";
+import { checkInCart } from "../utils/checkInCart";
+import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 const HomePage = () => {
+  const { cart } = useCart();
   const dispatch = useCartActions();
   const addProductHandler = (product) => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
+    if (!checkInCart(cart, product)) {
+      toast.success(`${product.name} added to Cart`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch({ type: "ADD_TO_CART", payload: product });
+    }
   };
   return (
     <Layout>
@@ -18,12 +33,21 @@ const HomePage = () => {
                 </div>
                 <div className="product__description">
                   <p>{product.name}</p>
-                  <p>${product.price}</p>
+                  <div>
+                    <p style={{ textDecoration: "line-through", color: "red" }}>
+                      ${product.price}
+                    </p>
+                    <p>${product.offPrice}</p>
+                  </div>
                   <button
                     onClick={() => addProductHandler(product)}
                     className="btn btn__primary"
                   >
-                    Add to Cart
+                    {checkInCart(cart, product) ? (
+                      <NavLink to="/cart">In cart</NavLink>
+                    ) : (
+                      "ADD to cart"
+                    )}
                   </button>
                 </div>
               </section>

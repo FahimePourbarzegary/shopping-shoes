@@ -52,7 +52,7 @@ export const products = [
   },
   {
     id: 5,
-    name: "Croopped-shoe",
+    name: "Croopped",
     description: [
       { support: "گارانتی مادام العمر" },
       { support: "اورجینال" },

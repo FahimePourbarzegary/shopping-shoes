@@ -14,9 +14,22 @@
   padding: 0.5rem;
   text-decoration: none;
   color: #1f2937;
+  position: relative;
 }
 .navigation a:hover {
   background-color: #f0f9ff;
   color: #075985;
   border-radius: 5px;
+}
+.navigation span {
+  width: 20px;
+  height: 20px;
+  background-color: #f0f9ff;
+  color: #075985;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 2%;
 }
