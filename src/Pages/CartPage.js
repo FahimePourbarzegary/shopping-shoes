@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import { useCart, useCartActions } from "../Providers/CartProvider";
 import "./cartPage.css";
@@ -30,11 +31,12 @@ const CartPage = () => {
                     <img src={item.image} alt={item.name} />
                   </div>
                   <div>{item.name}</div>
-                  <div>{item.quantity}</div>
                   <div>{item.offPrice * item.quantity}$</div>
-                  <div>
+                  <div
+                    className="btn-group"
+                  >
                     <button onClick={() => decrementHandler(item)}>-</button>
-
+                    <button>{item.quantity}</button>
                     <button onClick={() => incrementHandler(item)}>+</button>
                   </div>
                 </section>
@@ -63,12 +65,15 @@ const CartSummary = ({ cart, total }) => {
       </div>
       <div className="summeryItem">
         <p>Orginal total price</p>
-        <p>{originalTotalPrice-total}</p>
+        <p>{originalTotalPrice - total}</p>
       </div>
       <div className="summeryItem net">
         <p>Net price</p>
         <p>{total}</p>
       </div>
+      <Link to="/checkout">
+        <button className="btn btn__primary">Go to checkout</button>
+      </Link>
     </section>
   );
 };

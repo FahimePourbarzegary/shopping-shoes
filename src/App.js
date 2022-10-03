@@ -5,12 +5,18 @@ import CartPage from "./Pages/CartPage";
 import CartProvider from "./Providers/CartProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CheckOutPage from "./Pages/CheckOutPage";
+import SignupPage from "./Pages/SignupPage";
+import LoginPage from "./Pages/LoginPage";
 function App() {
   return (
     <CartProvider>
       <ToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/checkout" element={<CheckOutPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
     </CartProvider>

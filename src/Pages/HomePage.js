@@ -46,7 +46,7 @@ const HomePage = () => {
                     {checkInCart(cart, product) ? (
                       <NavLink to="/cart">In cart</NavLink>
                     ) : (
-                      "ADD to cart"
+                      "Add to cart"
                     )}
                   </button>
                 </div>

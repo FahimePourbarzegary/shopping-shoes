@@ -1,0 +1,21 @@
+.form{
+    width: 20rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #075985;
+}
+
+.signupform{
+    display: flex;
+    justify-content: center;
+}
+.signupform button{
+    width: 100%;
+}
