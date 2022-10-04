@@ -59,3 +59,8 @@ body {
   text-decoration: none;
   color: white;
 }
+button:disabled{
+  cursor: no-drop;
+  background-color: #ccc;
+  color: #444;
+}

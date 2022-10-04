@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import Input from "../common/Input";
 import "./SignupForm.css";
@@ -14,24 +15,25 @@ const SignupForm = () => {
     console.log(values);
   };
   const validationSchema = yup.object({
-    name: yup.string().required("name is Reqired"),
-    email: yup.string().email("email is invalid").required("email is Required"),
-    phoneNumber: yup.string().required("phoneNumber is Reqired"),
+    name: yup.string().required("name is required"),
+    email: yup.string().email("email is invalid").required("email is required"),
+    phoneNumber: yup.string().required("phoneNumber is required"),
     password: yup
       .string()
-      .required("password is Reqired")
-      .min(8, "Password is too short - should be 8 chars minimum.")
-      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+      .required("password is required")
+      .min(8, "Password is too short - should be 8 chars minimum."),
     confirmPassword: yup
       .string()
+      .required("Confirm password is required")
       .oneOf([yup.ref("password"), null], "Passwords must match"),
   });
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
-    validateOnMount: true,
+    validateOnMount:true,
   });
+
   return (
     <div className="signupform">
       <form className="form" onSubmit={formik.handleSubmit}>
@@ -42,6 +44,12 @@ const SignupForm = () => {
           label="Password"
           name="password"
           type="password"
+        />
+        <Input
+          formik={formik}
+          label="PhoneNumber"
+          name="phoneNumber"
+          type="tel"
         />
         <Input
           formik={formik}
@@ -56,6 +64,7 @@ const SignupForm = () => {
         >
           Sign Up
         </button>
+        <Link to="/login">Already Login?</Link>
       </form>
     </div>
   );
