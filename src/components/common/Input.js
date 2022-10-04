@@ -10,7 +10,7 @@ const Input = ({ label, name, formik, type = "text" }) => {
         {...formik.getFieldProps(name)}
       />
       {formik.errors[name] && formik.touched[name] && (
-        <div className="error">{formik.errors[name]}</div>
+        <div className="error">*{formik.errors[name]}</div>
       )}
     </div>
   );

@@ -20,3 +20,7 @@
     width: 100%;
       margin-bottom: 1rem;
 }
+.signupform a{
+    text-decoration: none;
+    color: #075985;
+}

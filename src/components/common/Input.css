@@ -4,6 +4,10 @@
 label{
     display: block;
 }
+.error{
+    padding: 0.2rem;
+    color: #ef4444;
+}
 input{
     width: 15rem;
     padding: 0.5rem;

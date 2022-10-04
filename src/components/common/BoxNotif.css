@@ -1,0 +1,14 @@
+.m-box {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.errorBox {
+  border: 1px solid #dc2626;
+  background-color: #fecaca;
+}
+.successBox {
+  border: 1px solid #16a34a;
+  background-color: #bbf7d0;
+}
