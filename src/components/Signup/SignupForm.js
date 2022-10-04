@@ -1,13 +1,14 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { signupUser } from "../../services/signupService";
 import BoxNotif from "../common/BoxNotif";
 import Input from "../common/Input";
 import "./SignupForm.css";
 const SignupForm = () => {
-  const [error,setError]=useState();
+  const navigate = useNavigate();
+  const [error, setError] = useState();
   const initialValues = {
     name: "",
     email: "",
@@ -15,20 +16,21 @@ const SignupForm = () => {
     password: "",
     confirmPassword: "",
   };
-  const onSubmit =async (values) => {
+  const onSubmit = async (values) => {
     const userData = {
       name: values.name,
       email: values.email,
       phoneNumber: values.phoneNumber,
       password: values.password,
     };
-   try {
-    const {data}=await signupUser(userData);
-    console.log(data);
-   } catch (error) {
-    console.log(error.response.data.message);
-    setError(error.response.data.message);
-   }
+    try {
+      const { data } = await signupUser(userData);
+      setError(null);
+      navigate("/");
+    } catch (error) {
+      if (error.response || error.response.data.message)
+        setError(error.response.data.message);
+    }
   };
   const validationSchema = yup.object({
     name: yup.string().required("name is required"),
@@ -47,7 +49,7 @@ const SignupForm = () => {
     initialValues,
     onSubmit,
     validationSchema,
-    validateOnMount:true,
+    validateOnMount: true,
   });
 
   return (
