@@ -26,7 +26,7 @@ const CartPage = () => {
           <section className="cartItemList">
             {cart.map((item) => {
               return (
-                <section className="cartItem">
+                <section className="cartItem" key={item.id}>
                   <div className="cartItem__img">
                     <img src={item.image} alt={item.name} />
                   </div>
@@ -71,7 +71,7 @@ const CartSummary = ({ cart, total }) => {
         <p>Net price</p>
         <p>{total}</p>
       </div>
-      <Link to="/checkout">
+      <Link to="/login?redirect=/checkout">
         <button className="btn btn__primary">Go to checkout</button>
       </Link>
     </section>

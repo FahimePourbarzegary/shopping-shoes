@@ -1,18 +1,26 @@
 import { useFormik } from "formik";
-import { useState } from "react";
-import { Link,useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import * as yup from "yup";
+import { useAuth, useAuthActions } from "../../Providers/AuthProvider";
 import { loginUser } from "../../services/loginService";
 import BoxNotif from "../common/BoxNotif";
 import Input from "../common/Input";
 import "./LoginForm.css";
 const LoginForm = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [error, setError] = useState();
+  const setAuth = useAuthActions();
+  const auth = useAuth();
   const initialValues = {
     email: "",
     password: "",
   };
+  const [searchParam] = useSearchParams();
+  const redirect = searchParam.get("redirect") || "/";
+  useEffect(() => {
+    if (auth) navigate(redirect);
+  }, [redirect,auth,navigate]);
   const onSubmit = async (values) => {
     const userData = {
       name: values.name,
@@ -22,8 +30,9 @@ const LoginForm = () => {
     };
     try {
       const { data } = await loginUser(userData);
+      setAuth(data);
       setError(null);
-      navigate("/");
+      navigate(redirect);
     } catch (error) {
       if (error.response || error.response.data.message)
         setError(error.response.data.message);
@@ -57,7 +66,7 @@ const LoginForm = () => {
           Login
         </button>
         {error ? <BoxNotif type="error" message={error}></BoxNotif> : null}
-        <Link to="/signup">Are you not Signup?</Link>
+        <Link to={`/signup?redirect=${redirect}`}>Are you not Signup?</Link>
       </form>
     </div>
   );

@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import * as yup from "yup";
+import { useAuth, useAuthActions } from "../../Providers/AuthProvider";
 import { signupUser } from "../../services/signupService";
 import BoxNotif from "../common/BoxNotif";
 import Input from "../common/Input";
@@ -9,6 +10,14 @@ import "./SignupForm.css";
 const SignupForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
+  const setAuth = useAuthActions();
+  const auth = useAuth();
+  const [searchParam] = useSearchParams();
+  const redirect = searchParam.get("redirect") || "/";
+
+  useEffect(() => {
+    if (auth) navigate(redirect);
+  }, [redirect, auth, navigate]);
   const initialValues = {
     name: "",
     email: "",
@@ -25,8 +34,9 @@ const SignupForm = () => {
     };
     try {
       const { data } = await signupUser(userData);
+      setAuth(data);
       setError(null);
-      navigate("/");
+      navigate(redirect);
     } catch (error) {
       if (error.response || error.response.data.message)
         setError(error.response.data.message);
@@ -83,7 +93,7 @@ const SignupForm = () => {
           Sign Up
         </button>
         {error ? <BoxNotif type="error" message={error}></BoxNotif> : null}
-        <Link to="/login">Already Login?</Link>
+        <Link to={`/login?redirect=${redirect}`}>Already Login?</Link>
       </form>
     </div>
   );
