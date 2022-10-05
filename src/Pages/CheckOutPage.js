@@ -1,9 +1,12 @@
+import CheckOut from "../components/CheckOut/CheckOut";
 import Layout from "../Layout/Layout";
 
 const CheckOutPage = () => {
-    return ( <Layout>
-        <h2>this is checkout page</h2>
-    </Layout> );
-}
- 
+  return (
+    <Layout>
+      <CheckOut />
+    </Layout>
+  );
+};
+
 export default CheckOutPage;
